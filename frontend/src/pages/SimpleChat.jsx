@@ -305,14 +305,14 @@ const SimpleChat = () => {
       <ChatHistoryContext.Provider value={chatHistoryContextValue}>
         <toghistoryContext.Provider value={toghistoryContextValue}>
           <newChatContext.Provider value={newChatContextValue}>
-            <div className={`h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex overflow-hidden`}>
+            <div className={`h-screen bg-black flex overflow-hidden`}>
               {/* History Sidebar */}
               <History />
 
               {/* Main Chat Area */}
               <div className={`flex-1 flex flex-col transition-all duration-300 ${togglehistory ? '' : 'ml-0'} ${Index ? "sm:mr-80" : "mr-0"}'}`}>
                 {/* Header */}
-                <div className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 p-4">
+                <div className="bg-black/50 backdrop-blur-sm border-b border-gray-700 p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       {!togglehistory && (
@@ -354,7 +354,7 @@ const SimpleChat = () => {
                     <div className="flex-1 flex items-center justify-center">
                       <div className="flex flex-col justify-center items-center  text-gray-400 max-w-md">
                         <img className="w-12 h-12 sm:w-[5rem] sm:h-[5rem]" src={MainLogo} alt="Simpl AI Logo" />
-                        <h2 className="text-2xl font-bold mb-2">Welcome to SIMPL-AI</h2>
+                        <h2 className="text-2xl font-bold mb-2">Welcome to SIMPL-AI Chat</h2>
                         <p className="text-center">Start a conversation by typing a message below. I'm here to help with any questions you have!</p>
                       </div>
                     </div>
@@ -457,7 +457,7 @@ const SimpleChat = () => {
 
                       <button
                         type="button"
-                        onClick={handleSubmit}
+                        onClick={(e)=>handleSubmit(e)}
                         disabled={!message.trim() || isLoading}
                         className="p-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-600 disabled:to-gray-700 text-white rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                       >

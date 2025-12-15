@@ -59,6 +59,18 @@ A specialized code editor built for algorithmic and input-output style problems.
 
 ---
 
+## Some Screenshots
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 1rem">
+  <img src="Images/Screenshots/S1.png" alt="S1" height="auto">
+  <img src="Images/Screenshots/S2.png" alt="S2" height="auto">
+  <img src="Images/Screenshots/S3.png" alt="S3" height="auto">
+  <img src="Images/Screenshots/S4.png" alt="S4" height="auto">
+  <img src="Images/Screenshots/S5.png" alt="S5" height="auto">
+  <img src="Images/Screenshots/S6.png" alt="S6" height="auto">
+  <img src="Images/Screenshots/S7.png" alt="S7" height="auto">
+</div>
+
+
 ## **🛠️ Tech Stack**
 
 ### **Frontend**

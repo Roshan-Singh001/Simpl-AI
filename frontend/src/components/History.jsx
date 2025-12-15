@@ -263,7 +263,7 @@ const History = () => {
       )}
       
       <section 
-        className={`flex flex-col h-screen bg-gray-900/95 backdrop-blur-lg border-r border-gray-700 text-white z-50 transform transition-all duration-300 ease-in-out ${
+        className={`flex flex-col h-screen bg-black/95 backdrop-blur-lg border-r border-gray-700 text-white z-50 transform transition-all duration-300 ease-in-out ${
           togglehistory 
             ? 'translate-x-0 w-80 shadow-2xl' 
             : '-translate-x-full w-0 overflow-hidden'
@@ -271,12 +271,12 @@ const History = () => {
         onClick={handleOutsideClick}
       >
         {/* Header */}
-        <div className='p-4 border-b border-gray-700 bg-gray-800/50'>
+        <div className='p-4 border-b border-gray-700 bg-black/50'>
           <div className='flex items-center justify-between mb-4'>
             <button 
               title='Hide History' 
               onClick={handleTogHistory} 
-              className='p-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors'
+              className='p-2 bg-black hover:bg-gray-600 text-white rounded-lg transition-colors'
             >
               <FaChevronLeft />
             </button>
