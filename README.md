@@ -1,6 +1,6 @@
 # **Simpl-AI: A Modern Platform of Intelligent Tools**
 
-<div style="text-align: center;">
+<div style="display: flex; justify-content: center; align-items: center;">
   <img src="Images/Logo/MainLogo2.png" alt="Logo" width="300" height="auto">
 </div>
 
@@ -56,6 +56,50 @@ A specialized code editor built for algorithmic and input-output style problems.
   * **Python**
 * Includes an **in-tool AI Assistant** for code-related queries.
 * Enables fast prototyping, learning, and debugging.
+
+---
+
+### **3. DocQuery – AI-Powered Document Intelligence (RAG-Based)**
+
+DocQuery is a Retrieval-Augmented Generation (RAG) tool that allows users to upload documents and ask contextual questions, with answers generated strictly from the document content using local AI models.
+
+**How It Works:**
+
+* Users upload documents in supported formats:
+
+  * **PDF**
+  * **DOCX (Word)**
+  * **PPTX (PowerPoint)**
+  * **TXT**
+* The system automatically:
+
+  * Extracts and cleans text from the document
+  * Splits content into optimized semantic chunks
+  * Generates embeddings using **Ollama (local embeddings)**
+  * Stores vectors in **ChromaDB** for efficient retrieval
+* When a question is asked:
+
+  * The query is embedded
+  * Relevant document chunks are retrieved via similarity search
+  * Context-aware answers are generated using **LLaMA 3**
+* Answers are **strictly grounded in the document** — no hallucinated responses.
+* Each document session maintains:
+
+  * Persistent chat history
+  * Document metadata (type, title, topic)
+  * Reload-safe state restoration
+* Fully **offline-capable** with no dependency on paid APIs.
+
+**Key Benefits:**
+
+* Privacy-first document processing
+* Fast, accurate document-based Q&A
+* Ideal for research, reports, contracts, and study material
+* Seamless integration within the **Simpl-AI** platform
+
+---
+
+**How It Works:**
 
 ---
 
@@ -226,4 +270,3 @@ Contributions are welcome.
 This project is released under the **MIT License**.
 
 ---
-
