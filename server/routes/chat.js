@@ -1,13 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import crypto from "crypto";
-import path from "path";
 import db from "../config/db.js";
 const chatRouter = express.Router();
 
-dotenv.config({
-  path: path.resolve("./server", ".env"),
-});
+dotenv.config();
 
 const generateTableName = (userId, instanceId)=>{
   const input = `${userId}:${instanceId}`;

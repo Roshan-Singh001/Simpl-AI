@@ -1,5 +1,6 @@
 .env
 node_modules
+.gitignore
 .DS_Store
 dist
 .vscode

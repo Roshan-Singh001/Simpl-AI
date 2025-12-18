@@ -4,20 +4,11 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from './lib/auth.js';
 import mysql2 from 'mysql2/promise';
 import cors from 'cors';
-import path from "path";
-import dotenv from "dotenv";
-import { fileURLToPath } from "url";
 import editorRouter from './routes/editor.js';
 import chatRouter from './routes/chat.js';
 import docRouter from './routes/doc.js';
 const app = express();
 const port = 3000;
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-// dotenv.config({
-//   path: path.resolve(__dirname, ".env"),
-// });
 
 // Middleware
 app.use(express.json());
@@ -82,6 +73,6 @@ app.post("/api/new_user", async(req,res)=>{
 
 });
 
-app.listen(port, () => {
+app.listen(port,"0.0.0.0", () => {
   console.log(`Example app listening on port ${port}`)
 })

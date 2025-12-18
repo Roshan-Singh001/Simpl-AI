@@ -7,7 +7,10 @@ import { extractText } from "../utils/extract.js";
 import { get_Collection, resetCollection, delete_Collection } from "../config/chromadb.js";
 import multer from "multer";
 import crypto from "crypto";
+import dotenv from "dotenv";
 const docRouter = express.Router();
+
+dotenv.config();
 
 const upload = multer();
 

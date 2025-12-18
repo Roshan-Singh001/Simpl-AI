@@ -1,16 +1,10 @@
 import express from "express";
 import axios from "axios";
 import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 const editorRouter = express.Router();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-dotenv.config({
-  path: path.resolve(__dirname, ".env"),
-});
+dotenv.config();
 console.log("Loaded VITE_API_KEY:", process.env.VITE_API_KEY);
 
 const genAI = new GoogleGenerativeAI(process.env.VITE_API_KEY);

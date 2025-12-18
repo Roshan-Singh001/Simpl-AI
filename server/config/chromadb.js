@@ -11,14 +11,13 @@ export async function resetCollection(name) {
 
   return await client.createCollection({
     name,
-    embeddingFunction: null, // Re-add this to prevent Chroma's default
+    embeddingFunction: null,
     dimension: 768
   });
 }
 
 export async function get_Collection(name) {
   const col = await client.getCollection({ name });
- // Ensure external embedding mode
   return col;
 }
 
