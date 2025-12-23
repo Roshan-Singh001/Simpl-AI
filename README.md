@@ -119,25 +119,22 @@ DocQuery is a Retrieval-Augmented Generation (RAG) tool that allows users to upl
 
 ### **Frontend**
 
-* React.js (Hooks + Context API)
+* React.js
 * Tailwind CSS
-* CodeMirror (code editor)
-* Axios
+* CodeMirror
 * React Toastify
 * react-speech-recognition
+* React Bits
 
 ### **Backend**
 
 * Node.js (Express.js)
 * MySQL
+* Chroma DB
+* Ollama
 * Google Gemini API (Generative AI)
 * Judge0 API (Code execution)
 * Better-Auth (Authentication layer)
-
-### **Other**
-
-* UUID for unique identifiers
-* Regenerator Runtime for async handling
 
 ---
 
@@ -157,22 +154,18 @@ simpl-ai/
 ### **Backend `.env`**
 
 ```
-DATABASE_PASS
-DB_HOST
-DB_USER
-DB_NAME
+MYSQL_PASSWORD=
+MYSQL_HOST=
+MYSQL_USER=
+MYSQL_DATABASE=
+RAPIDAPI_KEY=
+VITE_API_KEY=
 
-# Gemini API
-VITE_API_KEY
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
+NODE_ENV="development"
 
-# Judge0 API
-RAPIDAPI_KEY
-
-# Authentication
-BETTER_AUTH_SECRET
-BETTER_AUTH_URL
-
-NODE_ENV="development" or "production"
+OLLAMA_BASE_URL=http://localhost:11434
 ```
 
 ### **Frontend `.env`**
@@ -180,6 +173,30 @@ NODE_ENV="development" or "production"
 ```
 VITE_API_KEY (gemini)
 RAPIDAPI_KEY
+```
+
+### **`.env` For Docker**
+
+```
+# Gemini
+VITE_API_KEY=
+RAPIDAPI_KEY=
+
+OLLAMA_BASE_URL=http://localhost:11434
+
+MYSQL_ROOT_PASSWORD=
+MYSQL_USER=
+
+MYSQL_HOST=
+MYSQL_PORT=
+
+MYSQL_DATABASE=
+MYSQL_PASSWORD=
+
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
+NODE_ENV="development"
+
 ```
 
 ---
@@ -192,6 +209,15 @@ RAPIDAPI_KEY
 * MySQL Server
 * A valid Gemini API key
 * A RapidAPI (Judge0) key
+* Download and install Ollama
+* Download llama3 and nomic-embed-text
+
+```bash
+ollama pull llama3
+```
+```bash
+ollama pull nomic-embed-text
+```
 
 ---
 
@@ -205,6 +231,11 @@ npm install
 
 1. Create a MySQL database.
 2. Configure `.env` with your credentials.
+3. Run the following command in another terminal:
+```bash
+npx @better-auth/cli migrate
+npx @better-auth/cli generate
+```
 3. Start the server:
 
 ```bash
@@ -236,6 +267,22 @@ http://localhost:5173
 
 ---
 
+## **How to Run using Docker**
+
+### Configure `.env` with your credentials in the root directory.
+
+### Run the command:
+```bash
+docker compose up --build
+```
+
+### Visit:
+
+```
+http://localhost:5173
+```
+
+
 ## **🧑‍💻 Usage Overview**
 
 ### **Chat Assistant**
@@ -251,6 +298,12 @@ http://localhost:5173
 * Let AI produce boilerplate and generate test cases.
 * Run code on Judge0.
 * Chat with the integrated AI assistant for help.
+
+### **Doc Query**
+
+* Create new chat.
+* Upload a document.
+* Ask questions.
 
 ---
 

@@ -23,26 +23,33 @@ app.use('/code',editorRouter);
 app.use('/chat',chatRouter);
 app.use('/doc',docRouter);
 
-const databasePass = process.env.DATABASE_PASS;
-const db_host = process.env.DB_HOST;
-const db_user = process.env.DB_USER;
+const databasePass = process.env.MYSQL_PASSWORD;
+const db_host = process.env.MYSQL_HOST;
+const db_user = process.env.MYSQL_USER;
+const db_name = process.env.MYSQL_DATABASE;
 
 // MYSQL Connection
 var conn;
-(async ()=>{
-  try {
-    conn = await mysql2.createConnection({
-      host: db_host,
-      user: db_user,
-      password: databasePass,
-      database: 'ai_assist'
-    });
-    console.log("Database connection established...");
-  } 
-  catch (err) {
-    console.error("Error in database connection: ", err);
+const connectWithDB = async (retries = 10, delayMs = 3000)=>{
+  for (let i = 0; i <= retries; i++) {
+    try {
+      conn = await mysql2.createConnection({
+        host: db_host,
+        user: db_user,
+        password: databasePass,
+        database: db_name
+      });
+      console.log("Database connection established...");
+    } 
+    catch (err) {
+      console.error("Error in database connection: ", err, " retrying...", i);
+      if (i === retries) throw err;
+      await new Promise(r => setTimeout(r, delayMs));
+    }
+    
   }
-})();
+};
+connectWithDB();
 
 app.post("/api/new_user", async(req,res)=>{
     const { userId } = req.body;

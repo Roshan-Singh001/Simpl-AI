@@ -1,18 +1,91 @@
-name: simpl-ai
-
-version: latest
-
 services:
-  server:
-    build: ./server
-    ports:
-      - "3000:3000"
-    environment:
-      - PORT=3000
-      - OPENAI_API_KEY=your_openai_api_key_here
   frontend:
     build: ./frontend
     ports:
       - "5173:3000"
     depends_on:
       - server
+    env_file:
+      - .env
+  server:
+    build: ./server
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      auth-migrate:
+        condition: service_started
+      chroma:
+        condition: service_started
+      ollama:
+        condition: service_started
+    env_file:
+      - .env
+  
+  auth-migrate:
+    build: ./server
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: better-auth migrate up --yes
+    env_file:
+      - .env
+
+  mysql:
+    image: mysql:8.0
+    container_name: simplai-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: simplai-chroma
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: simplai-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+  
+  pull-models:
+    image: ollama/ollama:latest
+    container_name: ollama-pull-models
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: /bin/sh
+    command: >
+      -c "sleep 5; 
+      ollama serve & 
+      sleep 5; 
+      ollama pull nomic-embed-text; 
+      ollama pull llama3; 
+      wait"
+
+volumes:
+  mysql_data:
+  chroma_data:
+  ollama_data:

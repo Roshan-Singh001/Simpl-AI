@@ -1,6 +1,6 @@
 import express from "express";
 import db from "../config/db.js"
-import ollama from "ollama";
+import {Ollama} from "ollama";
 import { chunkText } from "../utils/chunks.js";
 import { embed } from "../utils/embedding.js";
 import { extractText } from "../utils/extract.js";
@@ -13,6 +13,10 @@ const docRouter = express.Router();
 dotenv.config();
 
 const upload = multer();
+
+const ollama1 = new Ollama({
+  host: process.env.OLLAMA_BASE_URL,
+});
 
 const generateTableName = (userId, instanceId) => {
   const input = `${userId}:${instanceId}`;
@@ -139,7 +143,7 @@ docRouter.post('/api/ask/:slug', async (req, res) => {
 
       Answer:`;
 
-    const llmRes = await ollama.generate({
+    const llmRes = await ollama1.generate({
       model: "llama3",
       prompt
     });

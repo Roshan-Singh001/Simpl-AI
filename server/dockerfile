@@ -6,6 +6,8 @@ COPY package*.json ./
 
 RUN npm install
 
+RUN npm install -g @better-auth/cli drizzle-orm@^0.41.0
+
 COPY . .
 
 CMD ["npm", "start"]

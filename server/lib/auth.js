@@ -9,11 +9,11 @@ dotenv.config();
 
 export const auth = betterAuth({
   database: createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DATABASE_PASS,
-    database: process.env.DB_NAME,
-    port: 3306,
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    port: process.env.MYSQL_PORT,
   }),
 
   user: {
@@ -31,10 +31,10 @@ export const auth = betterAuth({
       // Drop user-specific chat instances table
       const dropChatInstancesTableSQL = `DROP TABLE IF EXISTS \`${userId}_chat_instances\``;
       await pool.query(dropChatInstancesTableSQL);
-      
+
       const dropChatInstancesTableSQL1 = `DROP TABLE IF EXISTS \`${userId}_doc_chat_instances\``;
       await pool.query(dropChatInstancesTableSQL1);
-                
+
     },
   },
 
@@ -47,5 +47,5 @@ export const auth = betterAuth({
       sameSite: 'lax',
     }
   },
-  trustedOrigins: ['http://localhost:5173'],
+  trustedOrigins: ['http://localhost:5173', 'http://localhost:3000'],
 })
